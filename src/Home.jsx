@@ -38,10 +38,19 @@ const Home = () => {
             <div key={item.episode_id} className="box">
               <div className="up">
                 <h2> {item.title}</h2>
-                <p> {item.release_date}</p>
+                <p>
+                  {new Date(item.release_date).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </p>
               </div>
               <div className="second">
-                <p> {item.opening_crawl}</p>
+                <p>
+                  {" "}
+                  {item.opening_crawl.split("\n").slice(0, 10).join("\n")}...
+                </p>
               </div>
               <div className="third">
                 <p>
