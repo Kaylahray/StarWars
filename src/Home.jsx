@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Spinner from "./Spinner";
 import { Header } from "./Header";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -34,7 +35,7 @@ const Home = () => {
         {error && <p>{`There's a problem fetching your data ${error}`}</p>}
 
         {data &&
-          data.results.map((item) => (
+          data.results.map((item, index) => (
             <div key={item.episode_id} className="box">
               <div className="up">
                 <h2> {item.title}</h2>
@@ -48,13 +49,12 @@ const Home = () => {
               </div>
               <div className="second">
                 <p>
-                  {" "}
                   {item.opening_crawl.split("\n").slice(0, 10).join("\n")}...
                 </p>
               </div>
               <div className="third">
                 <p>
-                  <a href="/"> more info</a>
+                  <Link to={"/more/" + (index + 1)}> more info </Link>
                 </p>
               </div>
             </div>
