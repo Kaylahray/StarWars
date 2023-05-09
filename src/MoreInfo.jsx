@@ -62,6 +62,7 @@ import Vehicles from "./Vehicles";
 import Planets from "./Planet";
 import Character from "./Character";
 import Spinner from "./Spinner";
+import "./MoreInfo.css";
 
 const MoreInfo = () => {
   const [loading, setLoading] = useState(false);
@@ -92,27 +93,42 @@ const MoreInfo = () => {
   });
 
   return (
-    <div>
-      <Link to="/">Go Back Home</Link>
-
+    <div className="main-body">
       <Header />
-      <div>
-        {loading && <Spinner />}
-        {error && <h3>{`There is a problem fetching your data - ${error}`}</h3>}
+      <div className="boxx">
+        <div className="section-1">
+          <div className="lefft">
+            <Link className="back" to="/">
+              &larr; Back to List
+            </Link>
+          </div>
 
-        <div>
-          {info && (
-            <div>
-              {info.title}
-              {info.director}
-              {info.producer}
-            </div>
+          {loading && <Spinner />}
+          {error && (
+            <h3>{`There is a problem fetching your data - ${error}`}</h3>
           )}
+
+          <div className="title-block">
+            {info && (
+              <div>
+                <h2> {info.title} </h2>
+                <p> Director: {info.director}</p>
+                <p> Producer: {info.producer} </p>
+              </div>
+            )}
+          </div>
         </div>
+        {info && (
+          <div className="description">
+            <p className="sub-head"> Description</p>
+            <p> {info.opening_crawl}</p>
+          </div>
+        )}
 
         {info?.characters?.length && (
-          <div>
-            <ul>
+          <div className="block">
+            <p className="sub-head"> Characters</p>
+            <ul className="character-list">
               {info.characters.map((character) => (
                 <Character url={character} key={character}>
                   {character}
@@ -122,8 +138,9 @@ const MoreInfo = () => {
           </div>
         )}
         {info?.planets?.length && (
-          <div>
-            <ul>
+          <div className="block">
+            <p className="sub-head"> Planet</p>
+            <ul className="planet-list">
               {info.planets.map((planet) => (
                 <Planets url={planet} key={planet}>
                   {planet}
@@ -133,8 +150,10 @@ const MoreInfo = () => {
           </div>
         )}
         {info?.species?.length && (
-          <div>
-            <ul>
+          <div className="block">
+            <p className="sub-head"> Species</p>
+
+            <ul className="species-list">
               {info.species.map((species) => (
                 <Species url={species} key={species}>
                   {species}
@@ -144,8 +163,10 @@ const MoreInfo = () => {
           </div>
         )}
         {info?.starships?.length && (
-          <div>
-            <ul>
+          <div className="block">
+            <p className="sub-head"> Starship</p>
+
+            <ul className="starship-list">
               {info.starships.map((starships) => (
                 <Starships url={starships} key={starships}>
                   {starships}
@@ -155,8 +176,10 @@ const MoreInfo = () => {
           </div>
         )}
         {info?.vehicles?.length && (
-          <div>
-            <ul>
+          <div className="block">
+            <p className="sub-head"> Vehicles</p>
+
+            <ul className="vehicle-list">
               {info.vehicles.map((vehicles) => (
                 <Vehicles url={vehicles} key={vehicles}>
                   {vehicles}
